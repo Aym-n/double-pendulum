@@ -31,6 +31,7 @@ damping = 0.999;
 
 #length of trailing points
 lineLength = 50;
+lineColor = (6, 120, 200);
 
 def transformCoords(x, y):
     return (x + 450, y + 150)
@@ -38,6 +39,8 @@ def transformCoords(x, y):
 # pygame setup
 pygame.init()
 screen = pygame.display.set_mode((900, 600))
+pygame.display.set_caption("Double Pendulum")
+
 clock = pygame.time.Clock()
 running = True
 
@@ -55,7 +58,7 @@ while running:
             running = False
         
         
-    screen.fill((0, 0, 0))
+    screen.fill((29, 30, 31))
     
     num1 = -g * (2 * m1 + m2) * math.sin(a1)
     num2 = -m2 * g * math.sin(a1 - 2 * a2)
@@ -84,20 +87,20 @@ while running:
     y1 = r1 * math.cos(a1)
     y2 = y1 + r2 * math.cos(a2)
 
-    pygame.draw.line(screen, (255, 255, 255), transformCoords(0, 0), transformCoords(x1, y1))
-    pygame.draw.line(screen, (255, 255, 255), transformCoords(x1, y1), transformCoords(x2, y2))
-    pygame.draw.circle(screen, (255, 255, 255), transformCoords(x1, y1), m1)
-    pygame.draw.circle(screen, (255, 255, 255), transformCoords(x2, y2), m2)
-    
-    v1 *= damping
-    v2 *= damping
-
     points.append(transformCoords(x2, y2))
 
     if len(points) > lineLength:
         points.pop(0)
 
-    pygame.draw.lines(screen, (255, 255, 255), False, points , 1)
+    pygame.draw.lines(screen, lineColor, False, points , 1)
+
+    pygame.draw.line(screen, (100, 100, 100), transformCoords(0, 0), transformCoords(x1, y1))
+    pygame.draw.line(screen, (100, 100, 100), transformCoords(x1, y1), transformCoords(x2, y2))
+    pygame.draw.circle(screen, (6, 143, 255), transformCoords(x1, y1), m1)
+    pygame.draw.circle(screen, (6, 143, 255), transformCoords(x2, y2), m2)
+    
+    v1 *= damping
+    v2 *= damping
 
     pygame.display.flip()
 
