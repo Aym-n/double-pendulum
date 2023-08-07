@@ -2,38 +2,25 @@
 import pygame
 import math
 
-
-#Leength Of Strings
 r1 = 200;
 r2 = 200;
-
-#Mass of Pendulum Bobs
 m1 = 10;
 m2 = 10;
+a1 = math.pi/3;
+a2 = 0;
 
-#Intial Angle
-a1 = math.pi/2; 
-a2 = math.pi/2;
-
-#Angular Velocities
 v1 = 0;
 v2 = 0;
 
-#Angular Accelaration
 accel1 = 0;
 accel2 = 0;
 
-#Accleration Due to Gravity
 g = 1;
 
-#Coefficent to simulate Viscousity
-damping = 0.999;
-
-#length of trailing points
-lineLength = 50;
+damping = 0.9;
 
 def transformCoords(x, y):
-    return (x + 450, y + 150)
+    return (x + 450, y+50)
 
 # pygame setup
 pygame.init()
@@ -89,12 +76,12 @@ while running:
     pygame.draw.circle(screen, (255, 255, 255), transformCoords(x1, y1), m1)
     pygame.draw.circle(screen, (255, 255, 255), transformCoords(x2, y2), m2)
     
-    v1 *= damping
-    v2 *= damping
+    v1 *= 0.99
+    v2 *= 0.99
 
     points.append(transformCoords(x2, y2))
 
-    if len(points) > lineLength:
+    if len(points) > 1000:
         points.pop(0)
 
     pygame.draw.lines(screen, (255, 255, 255), False, points , 1)
