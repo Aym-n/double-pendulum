@@ -5,15 +5,15 @@ import math
 
 #Leength Of Strings
 r1 = 200;
-r2 = 200;
+r2 = 150;
 
 #Mass of Pendulum Bobs
-m1 = 10;
+m1 = 20;
 m2 = 10;
 
 #Intial Angle
 a1 = math.pi/2; 
-a2 = math.pi/2;
+a2 = math.pi/6;
 
 #Angular Velocities
 v1 = 0;
@@ -27,10 +27,10 @@ accel2 = 0;
 g = 1;
 
 #Coefficent to simulate Viscousity
-damping = 0.999;
+damping = 1;
 
 #length of trailing points
-lineLength = 50;
+lineLength = 1000;
 lineColor = (6, 120, 200);
 
 def transformCoords(x, y):
@@ -51,12 +51,12 @@ y1 = r1 * math.cos(a1)
 y2 = y1 + r2 * math.cos(a2)
 
 
-points = [(x2, y2)]
+points = [transformCoords(x2, y2)]
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        
         
     screen.fill((29, 30, 31))
     
